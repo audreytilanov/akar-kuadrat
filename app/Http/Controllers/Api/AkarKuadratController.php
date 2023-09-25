@@ -11,6 +11,9 @@ class AkarKuadratController extends Controller
 {
     public function hitungAkarKuadrat($number)
     {
+        if($number == null){
+            $number = 0;
+        }
         if(!is_numeric($number)){
             return response()->json(['error' => 'Input Tidak Boleh String'], 400);
         }
@@ -21,5 +24,6 @@ class AkarKuadratController extends Controller
 
             return response()->json(['result' => $result]);
         }
+            
     }
 }

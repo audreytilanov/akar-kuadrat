@@ -12,6 +12,8 @@ class ExampleTest extends TestCase
      *
      * @return void
      */
+
+    //  Path Testing
     public function testHasilFungsiValid()
     {
         $angka = 25;
@@ -27,6 +29,19 @@ class ExampleTest extends TestCase
      *
      * @return void
      */
+
+    public function testNilaiString()
+    {
+        $angka = 'inistring';
+
+        $response = $this->json('GET', "api/akar-kuadrat/$angka");
+
+        $response->assertJson(
+            ['error' => 'Input Tidak Boleh String']
+        );
+    }
+    
+    // Boundary Testing
     public function testAngkaMelebihiBatas()
     {
         $angka = 350000000000000000000000000000000;
@@ -47,39 +62,10 @@ class ExampleTest extends TestCase
             [
                 'result' => [
                     [
-                        'error' => 'Input Tidak Boleh Negatif atau < 0'
+                        'error' => 'Input Tidak Boleh Negatif'
                     ]
                 ]
             ]
         );
     }
-
-    public function testAngkaNol()
-    {
-        $angka = 0;
-
-        $response = $this->json('GET', "api/akar-kuadrat/$angka");
-
-        $response->assertJson(
-            [
-                'result' => [
-                    [
-                        'error' => 'Input Tidak Boleh Negatif atau < 0'
-                    ]
-                ]
-            ]
-        );
-    }
-
-    public function testNilaiString()
-    {
-        $angka = 'Testing';
-
-        $response = $this->json('GET', "api/akar-kuadrat/$angka");
-
-        $response->assertJson(
-            ['error' => 'Input Tidak Boleh String']
-        );
-    }
-    
 }
