@@ -30,6 +30,23 @@ class ExampleTest extends TestCase
      * @return void
      */
 
+    public function testAngkaNol()
+    {
+        $angka = 0;
+
+        $response = $this->json('GET', "api/akar-kuadrat/$angka");
+
+        $response->assertJson(
+            [
+                'result' => [
+                    [
+                        'hasil' => '0'
+                    ]
+                ]
+            ]
+        );
+    }
+
     public function testNilaiString()
     {
         $angka = 'inistring';
